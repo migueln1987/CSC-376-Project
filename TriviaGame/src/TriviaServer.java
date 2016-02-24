@@ -15,12 +15,12 @@ public class TriviaServer {
 	{
 		try
 		{
-			@SuppressWarnings("resource")
 			ServerSocket server_socket = new ServerSocket(port);
 			Socket client;
-			
+			boolean done = false;
 			while (true)
 			{
+				if (done) break;
 				client = server_socket.accept();
 				if (clients.size() == 2)
 				{
@@ -32,7 +32,7 @@ public class TriviaServer {
 				clients.add(client);
 				}
 			}
-			//server_socket.close();
+			server_socket.close();
 		}
 		catch (Exception e)
 		{
@@ -43,6 +43,7 @@ public class TriviaServer {
 	public static void main(String[] args)
 	{
 		TriviaServer ts = new TriviaServer(Integer.valueOf(args[0]));
+		ts.clientConnection();
 	}
 
 }
