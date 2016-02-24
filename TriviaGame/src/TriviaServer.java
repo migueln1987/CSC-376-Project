@@ -3,8 +3,10 @@ import java.net.Socket;
 import java.util.ArrayList;
 
 public class TriviaServer {
+	
 	private ArrayList<Socket> clients;
 	private int port;
+	
 	public TriviaServer(int port)
 	{
 		this.port = port;
