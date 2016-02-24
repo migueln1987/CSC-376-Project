@@ -24,15 +24,15 @@ public class TriviaServer {
 			{
 				if (done) break;
 				client = server_socket.accept();
+				clients.add(client);
 				if (clients.size() == 2)
 				{
+					System.out.println("two clients in game");
 					new Thread(new TriviaGame(clients)).start();
 					clients = new ArrayList<Socket>();
 				}
-				else
-				{
-				clients.add(client);
-				}
+
+				System.out.println(clients.size());
 			}
 			server_socket.close();
 		}
