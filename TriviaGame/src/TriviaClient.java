@@ -2,6 +2,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintStream;
+import java.io.PrintWriter;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
@@ -11,8 +12,9 @@ public class TriviaClient implements Runnable{
 	static BufferedReader in;
 	static PrintStream ps;
 	static BufferedReader stdIn;
-
+	
 	public static void main(String[] args) {
+		
 		int port = 6001;
 		InetAddress loopback = InetAddress.getLoopbackAddress();
 		
@@ -21,23 +23,19 @@ public class TriviaClient implements Runnable{
 			System.out.println("Connected...");
 			in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
 			stdIn = new BufferedReader(new InputStreamReader(System.in));
-			ps = new PrintStream(clientSocket.getOutputStream());
+			//ps = new PrintStream(clientSocket.getOutputStream());
+			PrintWriter output= new PrintWriter( clientSocket.getOutputStream(), true );
+			
+			
 			System.out.println(in.readLine());
-			String input;
-			Thread readThread = new Thread(new TriviaClient());
-			readThread.start();
-			while ((input = stdIn.readLine()) != null)
-			{
-				System.out.println(input);
-				stdIn.readLine();
-			}
-			ps.print(stdIn.readLine());
-			/*
+		
+			//Thread readThread = new Thread(new TriviaClient());
+			//readThread.start();
 			System.out.println(in.readLine());
-			System.out.println(in.readLine());
-			System.out.println(in.readLine());
-			System.out.println(in.readLine());
-			*/
+			
+			System.out.println("Enter Response: ");	
+			output.println(stdIn.readLine());
+
 			clientSocket.close();
 			
 		} catch (UnknownHostException e) {

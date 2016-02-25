@@ -46,7 +46,7 @@ public class TriviaGame implements Runnable {
 
 			for (String option : questions.get(question))
 			{
-				strbld.append(option + "\n");
+				strbld.append(option + " ");
 			}
 			output1.println(strbld.toString());
 			output2.println(strbld.toString());
