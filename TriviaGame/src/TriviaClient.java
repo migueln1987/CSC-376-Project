@@ -29,7 +29,9 @@ public class TriviaClient implements Runnable{
 			while ((input = stdIn.readLine()) != null)
 			{
 				System.out.println(input);
+				stdIn.readLine();
 			}
+			ps.print(stdIn.readLine());
 			/*
 			System.out.println(in.readLine());
 			System.out.println(in.readLine());
@@ -48,7 +50,7 @@ public class TriviaClient implements Runnable{
 	}
 
 
-	@SuppressWarnings("deprecation")
+	
 	@Override
 	public void run() {
 		String fromServer;

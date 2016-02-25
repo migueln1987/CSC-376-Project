@@ -29,9 +29,11 @@ public class TriviaGame implements Runnable {
 	
 	/**
 	 * for testing... Actually game will have more complex questions
+	 * @throws IOException 
 	 */
-	public void beginGame()
+	public void beginGame() throws IOException
 	{
+		
 		createQuestion();
 		StringBuilder strbld = new StringBuilder();
 		for (String question : questions.keySet())
@@ -49,8 +51,13 @@ public class TriviaGame implements Runnable {
 			output1.println(strbld.toString());
 			output2.println(strbld.toString());
 			
+			String response1 = input1.readLine();
+			String response2 = input2.readLine();
+			System.out.println("player one says: " + response1 + "\n"
+					+ "player two says: " + response2);
 		}
-
+		
+		
 	}
 	
 	/**
@@ -71,8 +78,13 @@ public class TriviaGame implements Runnable {
 	}
 	@Override
 	public void run() {
-		beginGame();
-		
+		try {
+			beginGame();
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
 	}
 }
 
