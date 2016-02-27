@@ -33,14 +33,14 @@ public class TriviaGame implements Runnable {
 	 */
 	public void beginGame() throws IOException
 	{
-		
+		String winner;
 		createQuestion();
 		StringBuilder strbld = new StringBuilder();
 		for (String question : questions.keySet())
 		{
 			output1.println(question);
 			output2.println(question);
-			//String right = questions.get(question).get(0);
+			String right = questions.get(question).get(0);
 			
 			Collections.shuffle(questions.get(question));
 
@@ -51,10 +51,30 @@ public class TriviaGame implements Runnable {
 			output1.println(strbld.toString());
 			output2.println(strbld.toString());
 			
-			String response1 = input1.readLine();
-			String response2 = input2.readLine();
+			String[] response1 = input1.readLine().split(",");
+			String[] response2 = input2.readLine().split(",");
+			
+			if (Integer.valueOf(response1[1]) < Integer.valueOf(response2[1]) )
+			{
+				if (response1[0].equals(right)) winner = "player1";
+				
+				else if (response2[0].equals(right)) winner = "player2";
+				
+				else winner = "both wrong";
+			}
+			else
+			{
+				if (response2[0].equals(right)) winner = "player1";
+				
+				else if (response1[0].equals(right)) winner = "player2";
+				
+				else winner = "both wrong";
+				
+			}
 			System.out.println("player one says: " + response1 + "\n"
 					+ "player two says: " + response2);
+			
+			System.out.println("winner: " + winner);
 		}
 		
 		
