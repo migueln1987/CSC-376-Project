@@ -49,8 +49,23 @@ public class Questions {
 		return option4;
 	}
 	
+	public String getRightAnswer(){
+		return option1;
+	}
+	public Boolean questionEquals(Questions question){
+		if(question.question.equals(this.question) && 
+				question.category.equals(this.category)&& 
+				question.option1.equals(this.option1)&& 
+				question.option2.equals(this.option2) && 
+				question.option3.equals(this.option3)&& 
+				question.option4.equals(this.option4))
+			return true;
+		else
+		return false;
+	}
+	
 	public String[] readCSV() throws IOException{
-		BufferedReader br = new BufferedReader(new FileReader("src\\questions.csv"));
+		BufferedReader br = new BufferedReader(new FileReader("questions.csv"));
 		String line = null;
 		Random rand = new Random();
 		int lineNumber = rand.nextInt(16);
