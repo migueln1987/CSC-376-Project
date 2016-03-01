@@ -38,6 +38,7 @@ public class TriviaGame implements Runnable {
 		StringBuilder strbld = new StringBuilder();
 //		for (String question : questions.keySet())
 //		{
+		
 		Questions question = new Questions();
 		output1.println(question.getQuestion());
 		output2.println(question.getQuestion());
@@ -78,8 +79,8 @@ public class TriviaGame implements Runnable {
 			String player1_an = response1[0];
 			String player2_an = response2[0];
 			
-			System.out.println("player one says: " + player1_an + "\n"
-					+ "player two says: " + player2_an);
+			System.out.println("player one says: " + player2_an + "\n"
+					+ "player two says: " + player1_an);
 			
 			System.out.println("winner: " + winner);
 //		}
