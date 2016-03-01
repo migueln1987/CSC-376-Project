@@ -38,6 +38,7 @@ public class TriviaGame implements Runnable {
 		StringBuilder strbld = new StringBuilder();
 //		for (String question : questions.keySet())
 //		{
+		
 		Questions question = new Questions();
 		output1.println(question.getQuestion());
 		output2.println(question.getQuestion());
@@ -47,43 +48,42 @@ public class TriviaGame implements Runnable {
 
 //			for (String option : questions.get(question))
 //			{
-			strbld.append(question.getOption1().toString() + " " + 
-						  question.getOption2().toString() + " " + 
-					      question.getOption3().toString() + " " +
-					      question.getOption4().toString() + " ");
+		strbld.append(question.getOption1().toString() + " " + 
+		question.getOption2().toString() + " " + 
+		question.getOption3().toString() + " " +
+		question.getOption4().toString() + " ");
 //			}
-			output1.println(strbld.toString());
-			output2.println(strbld.toString());
+		output1.println(strbld.toString());
+		output2.println(strbld.toString());
 			
-			String[] response1 = input1.readLine().split(",");
-			String[] response2 = input2.readLine().split(",");
+		String[] response1 = input1.readLine().split(",");
+		String[] response2 = input2.readLine().split(",");
 		
-			if (Integer.valueOf(response1[1]) < Integer.valueOf(response2[1]) )
-			{
-				if (response1[0].equals(right)) winner = "player1";
+		if (Integer.valueOf(response1[1]) < Integer.valueOf(response2[1]) )
+		{
+			if (response1[0].equals(right)) winner = "player1";
 				
-				else if (response2[0].equals(right)) winner = "player2";
+			else if (response2[0].equals(right)) winner = "player2";
 				
-				else winner = "both wrong";
-			}
-			else
-			{
-				if (response2[0].equals(right)) winner = "player1";
+			else winner = "both wrong";
+		}
+		else
+		{
+			if (response2[0].equals(right)) winner = "player1";
 				
-				else if (response1[0].equals(right)) winner = "player2";
+			else if (response1[0].equals(right)) winner = "player2";
 				
-				else winner = "both wrong";
+			else winner = "both wrong";
 				
-			}
-			String player1_an = response1[0];
-			String player2_an = response2[0];
+		}
+		String player1_an = response1[0];
+		String player2_an = response2[0];
 			
-			System.out.println("player one says: " + player1_an + "\n"
-					+ "player two says: " + player2_an);
+		System.out.println("player one says: " + player2_an + "\n"
+		+ "player two says: " + player1_an);
 			
-			System.out.println("winner: " + winner);
+		System.out.println("winner: " + winner);
 //		}
-		
 		
 	}
 	
