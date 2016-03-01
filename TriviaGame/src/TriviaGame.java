@@ -38,11 +38,13 @@ public class TriviaGame implements Runnable {
 		StringBuilder strbld = new StringBuilder();
 //		for (String question : questions.keySet())
 //		{
-		
-		Questions question = new Questions();
-		output1.println(question.getQuestion());
-		output2.println(question.getQuestion());
-		String right = question.getOption1();
+		boolean runGame = true;
+		//test to get questions more than once
+		while(runGame){
+			Questions question = new Questions();
+			output1.println(question.getQuestion());
+			output2.println(question.getQuestion());
+			String right = question.getOption1();
 			
 //			Collections.shuffle(questions.get(question));
 
@@ -84,6 +86,7 @@ public class TriviaGame implements Runnable {
 			
 			System.out.println("winner: " + winner);
 //		}
+		}
 		
 		
 	}
