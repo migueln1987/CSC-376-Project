@@ -36,18 +36,22 @@ public class TriviaGame implements Runnable {
 		String winner;
 		createQuestion();
 		StringBuilder strbld = new StringBuilder();
-		for (String question : questions.keySet())
-		{
-			output1.println(question);
-			output2.println(question);
-			String right = questions.get(question).get(0);
+//		for (String question : questions.keySet())
+//		{
+		Questions question = new Questions();
+		output1.println(question.getQuestion());
+		output2.println(question.getQuestion());
+		String right = question.getOption1();
 			
-			Collections.shuffle(questions.get(question));
+//			Collections.shuffle(questions.get(question));
 
-			for (String option : questions.get(question))
-			{
-				strbld.append(option + " ");
-			}
+//			for (String option : questions.get(question))
+//			{
+			strbld.append(question.getOption1().toString() + " " + 
+						  question.getOption2().toString() + " " + 
+					      question.getOption3().toString() + " " +
+					      question.getOption4().toString() + " ");
+//			}
 			output1.println(strbld.toString());
 			output2.println(strbld.toString());
 			
@@ -75,7 +79,7 @@ public class TriviaGame implements Runnable {
 					+ "player two says: " + response2);
 			
 			System.out.println("winner: " + winner);
-		}
+//		}
 		
 		
 	}
