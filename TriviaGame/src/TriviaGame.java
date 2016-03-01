@@ -57,7 +57,7 @@ public class TriviaGame implements Runnable {
 			
 			String[] response1 = input1.readLine().split(",");
 			String[] response2 = input2.readLine().split(",");
-			
+		
 			if (Integer.valueOf(response1[1]) < Integer.valueOf(response2[1]) )
 			{
 				if (response1[0].equals(right)) winner = "player1";
@@ -75,8 +75,11 @@ public class TriviaGame implements Runnable {
 				else winner = "both wrong";
 				
 			}
-			System.out.println("player one says: " + response1 + "\n"
-					+ "player two says: " + response2);
+			String player1_an = response1[0];
+			String player2_an = response2[0];
+			
+			System.out.println("player one says: " + player1_an + "\n"
+					+ "player two says: " + player2_an);
 			
 			System.out.println("winner: " + winner);
 //		}
