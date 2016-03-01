@@ -52,18 +52,25 @@ public class Questions {
 	public String[] readCSV() throws IOException{
 		BufferedReader br = new BufferedReader(new FileReader("src\\questions.csv"));
 		String line = null;
-		Random rand = new Random(16);
-		int lineNumber = rand.nextInt();
-		
-		for(int i = 0; i < lineNumber; ++i){
+		Random rand = new Random();
+		int lineNumber = rand.nextInt(16);
+		for(int i = 0; i < lineNumber; i++){
 			  br.readLine();
 		}
 		line =br.readLine();
 		csvLine = line.split(",");
 		br.close();
 		return csvLine;
-		}
+	}
 	
-	
+	public void nextQuestion() throws IOException{
+		String [] questionArray = readCSV();
+		this.category = questionArray[0];
+		this.question = questionArray[1];
+		this.option1 = questionArray[2];
+		this.option2 = questionArray[3];
+		this.option3 = questionArray[4];
+		this.option4 = questionArray[5];
+	}
 }
 
