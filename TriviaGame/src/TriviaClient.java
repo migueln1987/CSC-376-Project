@@ -34,7 +34,7 @@ public class TriviaClient {
 			PrintWriter output= new PrintWriter( clientSocket.getOutputStream(), true );
 			//start game. will be in a loop for multiple questions
 			String answer = "nothing";
-			
+			String correct_answer, message;
 			for (int i = 0; i < 10; i++) {
 				// question
 				System.out.println(in.readLine());
@@ -55,11 +55,12 @@ public class TriviaClient {
 
 				if (stdIn.ready()) {
 					answer = stdIn.readLine();
-					System.out.println("You entered: " + answer);
+					//System.out.println("You entered: " + answer);
 				
 				} 	
 				else {
-					System.out.println("You did not enter data");
+					answer = "wrong";
+					//System.out.println("You did not enter data");
 		    
 				}
 		
@@ -67,8 +68,16 @@ public class TriviaClient {
 				long d2 = new Date().getTime();
 				long answer_time = d2 - d1;
 				output.println(answer + "," + Integer.toString((int) answer_time));
+				
+				correct_answer = in.readLine();
+				//message = in.readLine();
+				System.out.println(correct_answer);
+				//System.out.println(message);
+			
+				
 			}
 			
+			System.out.println(in.readLine());
 			clientSocket.close();
 		
 	} catch (UnknownHostException e) {
