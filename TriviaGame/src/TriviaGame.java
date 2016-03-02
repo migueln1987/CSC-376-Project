@@ -8,6 +8,7 @@ import java.util.HashMap;
 
 public class TriviaGame implements Runnable {
 	Socket player1, player2;
+	int score1, score2;
 	private BufferedReader input1, input2;
 	private PrintWriter output1, output2;
 	
@@ -35,9 +36,10 @@ public class TriviaGame implements Runnable {
 //		ScoreBoard triviaScore = new ScoreBoard();
 		String winner = null;
 		StringBuilder strbld = new StringBuilder();
-
+		int count = 0;
 		QuestionManager questionManager = new QuestionManager("questions.csv");
-		while (winner == null){
+		
+		while (count < 10){
 		Question question = questionManager.getQuestion();
 		output1.println(question.getQuestion());
 		output2.println(question.getQuestion());
@@ -70,8 +72,11 @@ public class TriviaGame implements Runnable {
 				else winner = "both wrong";
 				
 			}
-			System.out.println("player one says: " + response1.toString() + "\n"
-					+ "player two says: " + response2.toString());
+			System.out.println("player one says: " + response1[0] + "\n"
+					+ "player two says: " + response2[0]);
+		
+		
+			count++;
 		}
 			
 			System.out.println("winner: " + winner);		

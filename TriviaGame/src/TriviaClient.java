@@ -35,7 +35,7 @@ public class TriviaClient {
 			//start game. will be in a loop for multiple questions
 			String answer = "nothing";
 			
-			for (int i = 0; i < 1; i++) {
+			for (int i = 0; i < 10; i++) {
 				// question
 				System.out.println(in.readLine());
 
