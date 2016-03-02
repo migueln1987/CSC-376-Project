@@ -4,7 +4,11 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
+
+//import com.sun.xml.internal.bind.v2.schemagen.xmlschema.List;
 
 public class TriviaGame implements Runnable {
 	Socket player1, player2;
@@ -35,48 +39,66 @@ public class TriviaGame implements Runnable {
 //		ScoreBoard triviaScore = new ScoreBoard();
 		String winner = null;
 		StringBuilder strbld = new StringBuilder();
-
-		QuestionManager questionManager = new QuestionManager("questions.csv");
-		while (winner == null){
-		Question question = questionManager.getQuestion();
-		output1.println(question.getQuestion());
-		output2.println(question.getQuestion());
-		String right = question.getRightAnswer();
-			
-		strbld.append(question.getOption1().toString() + " " + 
-					  question.getOption2().toString() + " " + 
-				      question.getOption3().toString() + " " +
-				      question.getOption4().toString() + " ");
-			output1.println(strbld.toString());
-			output2.println(strbld.toString());
-			
-			String[] response1 = input1.readLine().split(",");
-			String[] response2 = input2.readLine().split(",");
-			
-			if (Integer.valueOf(response1[1]) < Integer.valueOf(response2[1]) )
-			{
-				if (response1[0].equals(right)) winner = "player1";
-				
-				else if (response2[0].equals(right)) winner = "player2";
-				
-				else winner = "both wrong";
-			}
-			else
-			{
-				if (response2[0].equals(right)) winner = "player2";
-				
-				else if (response1[0].equals(right)) winner = "player1";
-				
-				else winner = "both wrong";
-				
-			}
-			System.out.println("player one says: " + response1.toString() + "\n"
-					+ "player two says: " + response2.toString());
-		}
-			
-			System.out.println("winner: " + winner);		
+		//int count = 0;
 		
-	}
+		//while(count < 10){
+			QuestionManager questionManager = new QuestionManager("questions.csv");
+			while (winner == null){
+				List <String> shuffle = new ArrayList<String>();
+				Question question = questionManager.getQuestion();
+				output1.println(question.getQuestion());
+				output2.println(question.getQuestion());
+				String right = question.getRightAnswer();
+				
+				shuffle.add(question.getOption1().toString());
+				shuffle.add(question.getOption2().toString());
+				shuffle.add(question.getOption3().toString());
+				shuffle.add(question.getOption4().toString());
+				
+				Collections.shuffle(shuffle);
+				
+				strbld.append(shuffle.get(0).toString() + " " + "," +
+					  shuffle.get(1).toString() + " " + "," +
+				      shuffle.get(2).toString() + " " + "," +
+				      shuffle.get(3).toString() + " ");
+				output1.println(strbld.toString());
+				output2.println(strbld.toString());
+			
+				String[] response1 = input1.readLine().split(",");
+				String[] response2 = input2.readLine().split(",");
+				
+				
+			
+				if (Integer.valueOf(response1[1]) < Integer.valueOf(response2[1]) )
+				{
+					if (response1[0].equals(right)) winner = "player1";
+				
+					else if (response2[0].equals(right)) winner = "player2";
+				
+					else winner = "both wrong";
+				}
+				else
+				{
+					if (response2[0].equals(right)) winner = "player2";
+				
+					else if (response1[0].equals(right)) winner = "player1";
+				
+					else winner = "both wrong";
+				
+				}
+				String player1_an = response1[0];
+				String player2_an = response2[0];
+			
+				System.out.println("player one responds: " + player1_an + "\n"
+						+ "player two responds: " + player2_an );
+				System.out.println("winner: " + winner);
+				
+			}
+			
+			//count++;
+		//}
+		}
+	
 	
 	@Override
 	public void run() {
