@@ -8,6 +8,7 @@ import java.util.HashMap;
 
 public class TriviaGame implements Runnable {
 	Socket player1, player2;
+	int score1, score2;
 	private BufferedReader input1, input2;
 	private PrintWriter output1, output2;
 	
@@ -35,9 +36,11 @@ public class TriviaGame implements Runnable {
 //		ScoreBoard triviaScore = new ScoreBoard();
 		String winner = null;
 		StringBuilder strbld = new StringBuilder();
-
+		int count = 0;
 		QuestionManager questionManager = new QuestionManager("questions.csv");
-		while (winner == null){
+		
+		while (count < 10){
+	
 		Question question = questionManager.getQuestion();
 		output1.println(question.getQuestion());
 		output2.println(question.getQuestion());
@@ -53,27 +56,111 @@ public class TriviaGame implements Runnable {
 			String[] response1 = input1.readLine().split(",");
 			String[] response2 = input2.readLine().split(",");
 			
+
+			
 			if (Integer.valueOf(response1[1]) < Integer.valueOf(response2[1]) )
 			{
-				if (response1[0].equals(right)) winner = "player1";
+				if (response1[0].equals(right)) {
+					winner = "player1";
+					score1++;
+				}
 				
-				else if (response2[0].equals(right)) winner = "player2";
+				else if (response2[0].equals(right)) {
+					winner = "player2";
+					score2++;
+				}
 				
 				else winner = "both wrong";
 			}
 			else
 			{
-				if (response2[0].equals(right)) winner = "player2";
+				if (response2[0].equals(right)) {
+					winner = "player2";
+					score2++;
+				}
 				
-				else if (response1[0].equals(right)) winner = "player1";
+				else if (response1[0].equals(right)) {
+					winner = "player1";
+					score1++;
+				}
 				
 				else winner = "both wrong";
 				
 			}
-			System.out.println("player one says: " + response1.toString() + "\n"
-					+ "player two says: " + response2.toString());
-		}
+			System.out.println("player one says: " + response1[0] + "\n"
+					+ "player two says: " + response2[0]);
 			
+			
+			output1.println("Correct Answer: " + right + ". Your Score: " + score1);
+			output2.println("Correct Answer: " + right + ". Your Score: " + score2);
+			/*
+			if (winner.equals("player1"))
+			{
+				output1.println("you (player1) ansewered: " + response1[0] + "in " + response1[1] + " seconds"+ "\n" 
+						+ "player2 ansewered: " + response2[0] + " in " + response2[1] + " seconds" + "\n"
+						+ "YOU WIN THE ROUND! YOUR CURRENT SCORE IS " + score1);
+						
+				output2.println("you (player2) ansewered: " + response2[0] + "in " + response2[1] + " seconds"+ "\n" 
+						+ "player1 ansewered: " + response1[0] + " in " + response1[1] + " seconds" + "\n"
+						+ "YOU LOSE THE ROUND! YOUR CURRENT SCORE IS " + score2);
+			}
+			else if (winner.equals("player2"))
+			{
+				output1.println("you (player1) ansewered: " + response1[0] + " in " + response1[1] + " seconds"+ "\n" 
+						+ "player2 ansewered: " + response2[0] + " in " + response2[1] + " seconds" + "\n"
+						+ "YOU LOSE THE ROUND! YOUR CURRENT SCORE IS " + score1);
+						
+				output2.println("you (player2) ansewered: " + response2[0] + "in " + response2[1] + " seconds"+ "\n" 
+						+ "player1 ansewered: " + response1[0] + "in " + response1[1] + " seconds" + "\n"
+						+ "YOU WIN THE ROUND! YOUR CURRENT SCORE IS " + score2);
+			}
+			else 
+			{
+				output1.println("you (player1) ansewered: " + response1[0] + "in " + response1[1] + " seconds"+ "\n" 
+						+ "player2 ansewered: " + response2[0] + "in " + response2[1] + " seconds" + "\n"
+						+ "YOU LOSE THE ROUND! YOUR CURRENT SCORE IS " + score1);
+						
+				output2.println("you (player2) ansewered: " + response2[0] + "in " + response2[1] + " seconds"+ "\n" 
+						+ "player1 ansewered: " + response1[0] + "in " + response1[1] + " seconds" + "\n"
+						+ "YOU LOSE THE ROUND! YOUR CURRENT SCORE IS " + score2);
+			}
+			*/
+			//output1.flush();
+			//output2.flush();
+			strbld = new StringBuilder();
+			count++;
+			
+		}
+			if (score1 > score2)
+			{
+				output1.println("you win, congrats you're smarter than your opponent.\n"
+						+ " Your Final Score: " + score1 + "/n"
+						+  "Opponents Final Score: " + score2); 
+						
+				output2.println("You Lose, Better Luck Next Time.\n"
+						+ " Your Final Score: " + score2 + "/n"
+						+  "Opponents Final Score: " + score1);
+			}
+			
+			if (score2 > score1)
+			{
+				output2.println("you win, congrats you're smarter than your opponent.\n"
+						+ " Your Final Score: " + score1 + "/n"
+						+  "Opponents Final Score: " + score2); 
+						
+				output1.println("You Lose, Better Luck Next Time.\n"
+						+ " Your Final Score: " + score2 + "/n"
+						+  "Opponents Final Score: " + score1);
+			}
+			else
+			{
+				output2.println("Tie\n"
+						+ " Your Final Score: " + score2 + "/n"
+						+  "Opponents Final Score: " + score1);
+				output1.println("Tie\n"
+						+ " Your Final Score: " + score2 + "/n"
+						+  "Opponents Final Score: " + score1);
+			}
 			System.out.println("winner: " + winner);		
 		
 	}
