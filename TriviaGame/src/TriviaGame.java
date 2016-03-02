@@ -63,9 +63,9 @@ public class TriviaGame implements Runnable {
 			}
 			else
 			{
-				if (response2[0].equals(right)) winner = "player1";
+				if (response2[0].equals(right)) winner = "player2";
 				
-				else if (response1[0].equals(right)) winner = "player2";
+				else if (response1[0].equals(right)) winner = "player1";
 				
 				else winner = "both wrong";
 				
