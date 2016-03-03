@@ -78,7 +78,6 @@ public class TriviaGame implements Runnable {
             String player2Response = response2[0];
 
             for (String s : answerList){
-                System.out.println("Right answer is " + right);
                 if (s.substring(3, s.length()).trim().toLowerCase().equals(right.toLowerCase())){
                     right = s;
                 }
