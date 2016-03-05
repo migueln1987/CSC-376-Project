@@ -12,7 +12,7 @@ public class TriviaGame implements Runnable {
 	private BufferedReader input1, input2;
 	private PrintWriter output1, output2;
 	
-	public HashMap<String, ArrayList<String>> questions;
+//	public HashMap<String, ArrayList<String>> questions;
 	public TriviaGame(ArrayList<Socket> clients) throws IOException
 	{
 		player1 = clients.get(0);
@@ -33,7 +33,7 @@ public class TriviaGame implements Runnable {
 	 */
 	public void beginGame() throws IOException
 	{
-//		ScoreBoard triviaScore = new ScoreBoard();
+		ScoreBoard triviaScore = new ScoreBoard(player1, player2);
 		String winner = null;
 		StringBuilder strbld = new StringBuilder();
 		int count = 0;
@@ -60,28 +60,32 @@ public class TriviaGame implements Runnable {
 			
 			if (Integer.valueOf(response1[1]) < Integer.valueOf(response2[1]) )
 			{
-				if (response1[0].equals(right)) {
+				if (response1[0].charAt(0) == right.charAt(0)) {
 					winner = "player1";
-					score1++;
+					triviaScore.addPointPlayer1();
+//					score1++;
 				}
 				
-				else if (response2[0].equals(right)) {
+				else if (response2[0].charAt(0) == right.charAt(0)){
 					winner = "player2";
-					score2++;
+					triviaScore.addPointPlayer2();
+//					score2++;
 				}
 				
 				else winner = "both wrong";
 			}
 			else
 			{
-				if (response2[0].equals(right)) {
+				if (response2[0].charAt(0) == right.charAt(0)) {
 					winner = "player2";
-					score2++;
+					triviaScore.addPointPlayer2();
+//					score2++;
 				}
 				
-				else if (response1[0].equals(right)) {
+				else if (response1[0].charAt(0) == right.charAt(0)) {
 					winner = "player1";
-					score1++;
+					triviaScore.addPointPlayer1();
+//					score1++;
 				}
 				
 				else winner = "both wrong";
@@ -91,8 +95,8 @@ public class TriviaGame implements Runnable {
 					+ "player two says: " + response2[0]);
 			
 			
-			output1.println("Correct Answer: " + right + ". Your Score: " + score1);
-			output2.println("Correct Answer: " + right + ". Your Score: " + score2);
+			output1.println("Correct Answer: " + right + ". Your Score: " + triviaScore.player1Score());//score1);
+			output2.println("Correct Answer: " + right + ". Your Score: " + triviaScore.player2Score);//score2);
 			/*
 			if (winner.equals("player1"))
 			{
@@ -131,26 +135,42 @@ public class TriviaGame implements Runnable {
 			count++;
 			
 		}
-			if (score1 > score2)
+			if (triviaScore.player1Score() > triviaScore.player2Score())
+//			if (score1 > score2)
 			{
 				output1.println("you win, congrats you're smarter than your opponent.\n"
-						+ " Your Final Score: " + score1 + "/n"
-						+  "Opponents Final Score: " + score2); 
+						+ " Your Final Score: " + triviaScore.player1Score() + "/n"
+						+  "Opponents Final Score: " + triviaScore.player2Score()); 
 						
 				output2.println("You Lose, Better Luck Next Time.\n"
-						+ " Your Final Score: " + score2 + "/n"
-						+  "Opponents Final Score: " + score1);
+						+ " Your Final Score: " + triviaScore.player2Score() + "/n"
+						+  "Opponents Final Score: " + triviaScore.player1Score());
+//				output1.println("you win, congrats you're smarter than your opponent.\n"
+//						+ " Your Final Score: " + score1 + "/n"
+//						+  "Opponents Final Score: " + score2); 
+//						
+//				output2.println("You Lose, Better Luck Next Time.\n"
+//						+ " Your Final Score: " + score2 + "/n"
+//						+  "Opponents Final Score: " + score1);
 			}
 			
-			if (score2 > score1)
+			if (triviaScore.player2Score() > triviaScore.player1Score())
+//			if (score2 > score1)
 			{
 				output2.println("you win, congrats you're smarter than your opponent.\n"
-						+ " Your Final Score: " + score1 + "/n"
-						+  "Opponents Final Score: " + score2); 
+						+ " Your Final Score: " + triviaScore.player1Score() + "/n"
+						+  "Opponents Final Score: " + triviaScore.player2Score()); 
 						
 				output1.println("You Lose, Better Luck Next Time.\n"
-						+ " Your Final Score: " + score2 + "/n"
-						+  "Opponents Final Score: " + score1);
+						+ " Your Final Score: " + triviaScore.player2Score() + "/n"
+						+  "Opponents Final Score: " + triviaScore.player1Score());
+//				output2.println("you win, congrats you're smarter than your opponent.\n"
+//						+ " Your Final Score: " + score1 + "/n"
+//						+  "Opponents Final Score: " + score2); 
+//						
+//				output1.println("You Lose, Better Luck Next Time.\n"
+//						+ " Your Final Score: " + score2 + "/n"
+//						+  "Opponents Final Score: " + score1);
 			}
 			else
 			{

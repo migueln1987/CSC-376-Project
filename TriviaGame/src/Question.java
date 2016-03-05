@@ -35,22 +35,34 @@ public class Question {
 	}
 	
 	public String getOption1(){
-		return option1;
+		return "a) " + option1;
 	}
 	
 	public String getOption2(){
-		return option2;
+		return "b) " + option2;
 	}
 	
 	public String getOption3(){
-		return option3;
+		return "c) " + option3;
 	}
 	
 	public String getOption4(){
-		return option4;
+		return "d) " + option4;
 	}
 	
 	public String getRightAnswer(){
+		if(getOption1().contains(rightAnswer)){
+			rightAnswer = "a) " + rightAnswer;
+		}
+		if(getOption2().contains(rightAnswer)){
+			rightAnswer = "b) " + rightAnswer;
+		}
+		if(getOption3().contains(rightAnswer)){
+			rightAnswer = "c) " + rightAnswer;
+		}
+		if(getOption4().contains(rightAnswer)){
+			rightAnswer = "d) " + rightAnswer;
+		}
 		return rightAnswer;
 	}
 	
