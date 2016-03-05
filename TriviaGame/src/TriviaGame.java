@@ -4,7 +4,6 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class TriviaGame implements Runnable {
 	Socket player1, player2;
@@ -12,7 +11,6 @@ public class TriviaGame implements Runnable {
 	private BufferedReader input1, input2;
 	private PrintWriter output1, output2;
 	
-//	public HashMap<String, ArrayList<String>> questions;
 	public TriviaGame(ArrayList<Socket> clients) throws IOException
 	{
 		player1 = clients.get(0);
@@ -27,10 +25,7 @@ public class TriviaGame implements Runnable {
 		output2 = new PrintWriter( player2.getOutputStream(), true );
 	}
 	
-	/**
-	 * for testing... Actually game will have more complex questions
-	 * @throws IOException 
-	 */
+
 	public void beginGame() throws IOException
 	{
 		ScoreBoard triviaScore = new ScoreBoard(player1, player2);
@@ -63,13 +58,11 @@ public class TriviaGame implements Runnable {
 				if (response1[0].charAt(0) == right.charAt(0)) {
 					winner = "player1";
 					triviaScore.addPointPlayer1();
-//					score1++;
 				}
 				
 				else if (response2[0].charAt(0) == right.charAt(0)){
 					winner = "player2";
 					triviaScore.addPointPlayer2();
-//					score2++;
 				}
 				
 				else winner = "both wrong";
@@ -79,13 +72,11 @@ public class TriviaGame implements Runnable {
 				if (response2[0].charAt(0) == right.charAt(0)) {
 					winner = "player2";
 					triviaScore.addPointPlayer2();
-//					score2++;
 				}
 				
 				else if (response1[0].charAt(0) == right.charAt(0)) {
 					winner = "player1";
 					triviaScore.addPointPlayer1();
-//					score1++;
 				}
 				
 				else winner = "both wrong";
@@ -95,48 +86,13 @@ public class TriviaGame implements Runnable {
 					+ "player two says: " + response2[0]);
 			
 			
-			output1.println("Correct Answer: " + right + ". Your Score: " + triviaScore.player1Score());//score1);
-			output2.println("Correct Answer: " + right + ". Your Score: " + triviaScore.player2Score);//score2);
-			/*
-			if (winner.equals("player1"))
-			{
-				output1.println("you (player1) ansewered: " + response1[0] + "in " + response1[1] + " seconds"+ "\n" 
-						+ "player2 ansewered: " + response2[0] + " in " + response2[1] + " seconds" + "\n"
-						+ "YOU WIN THE ROUND! YOUR CURRENT SCORE IS " + score1);
-						
-				output2.println("you (player2) ansewered: " + response2[0] + "in " + response2[1] + " seconds"+ "\n" 
-						+ "player1 ansewered: " + response1[0] + " in " + response1[1] + " seconds" + "\n"
-						+ "YOU LOSE THE ROUND! YOUR CURRENT SCORE IS " + score2);
-			}
-			else if (winner.equals("player2"))
-			{
-				output1.println("you (player1) ansewered: " + response1[0] + " in " + response1[1] + " seconds"+ "\n" 
-						+ "player2 ansewered: " + response2[0] + " in " + response2[1] + " seconds" + "\n"
-						+ "YOU LOSE THE ROUND! YOUR CURRENT SCORE IS " + score1);
-						
-				output2.println("you (player2) ansewered: " + response2[0] + "in " + response2[1] + " seconds"+ "\n" 
-						+ "player1 ansewered: " + response1[0] + "in " + response1[1] + " seconds" + "\n"
-						+ "YOU WIN THE ROUND! YOUR CURRENT SCORE IS " + score2);
-			}
-			else 
-			{
-				output1.println("you (player1) ansewered: " + response1[0] + "in " + response1[1] + " seconds"+ "\n" 
-						+ "player2 ansewered: " + response2[0] + "in " + response2[1] + " seconds" + "\n"
-						+ "YOU LOSE THE ROUND! YOUR CURRENT SCORE IS " + score1);
-						
-				output2.println("you (player2) ansewered: " + response2[0] + "in " + response2[1] + " seconds"+ "\n" 
-						+ "player1 ansewered: " + response1[0] + "in " + response1[1] + " seconds" + "\n"
-						+ "YOU LOSE THE ROUND! YOUR CURRENT SCORE IS " + score2);
-			}
-			*/
-			//output1.flush();
-			//output2.flush();
+			output1.println("Correct Answer: " + right + ". Your Score: " + triviaScore.player1Score());
+			output2.println("Correct Answer: " + right + ". Your Score: " + triviaScore.player2Score);
 			strbld = new StringBuilder();
 			count++;
 			
 		}
 			if (triviaScore.player1Score() > triviaScore.player2Score())
-//			if (score1 > score2)
 			{
 				output1.println("you win, congrats you're smarter than your opponent.\n"
 						+ " Your Final Score: " + triviaScore.player1Score() + "/n"
@@ -145,17 +101,9 @@ public class TriviaGame implements Runnable {
 				output2.println("You Lose, Better Luck Next Time.\n"
 						+ " Your Final Score: " + triviaScore.player2Score() + "/n"
 						+  "Opponents Final Score: " + triviaScore.player1Score());
-//				output1.println("you win, congrats you're smarter than your opponent.\n"
-//						+ " Your Final Score: " + score1 + "/n"
-//						+  "Opponents Final Score: " + score2); 
-//						
-//				output2.println("You Lose, Better Luck Next Time.\n"
-//						+ " Your Final Score: " + score2 + "/n"
-//						+  "Opponents Final Score: " + score1);
 			}
 			
 			if (triviaScore.player2Score() > triviaScore.player1Score())
-//			if (score2 > score1)
 			{
 				output2.println("you win, congrats you're smarter than your opponent.\n"
 						+ " Your Final Score: " + triviaScore.player1Score() + "/n"
@@ -164,13 +112,6 @@ public class TriviaGame implements Runnable {
 				output1.println("You Lose, Better Luck Next Time.\n"
 						+ " Your Final Score: " + triviaScore.player2Score() + "/n"
 						+  "Opponents Final Score: " + triviaScore.player1Score());
-//				output2.println("you win, congrats you're smarter than your opponent.\n"
-//						+ " Your Final Score: " + score1 + "/n"
-//						+  "Opponents Final Score: " + score2); 
-//						
-//				output1.println("You Lose, Better Luck Next Time.\n"
-//						+ " Your Final Score: " + score2 + "/n"
-//						+  "Opponents Final Score: " + score1);
 			}
 			else
 			{

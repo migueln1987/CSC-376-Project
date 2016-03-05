@@ -32,7 +32,6 @@ public class TriviaClient {
 			in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
 			stdIn = new BufferedReader(new InputStreamReader(System.in));
 			PrintWriter output= new PrintWriter( clientSocket.getOutputStream(), true );
-			//start game. will be in a loop for multiple questions
 			String answer = "nothing";
 			String correct_answer, message;
 			for (int i = 0; i < 10; i++) {
@@ -41,11 +40,9 @@ public class TriviaClient {
 
 				//options
 				System.out.println(in.readLine());
-		
-		
+	
 				System.out.println("Enter Response: ");
 
-			
 				long d1 = new Date().getTime();
 		
 				long startTime = System.currentTimeMillis();
@@ -55,26 +52,16 @@ public class TriviaClient {
 
 				if (stdIn.ready()) {
 					answer = stdIn.readLine();
-					//System.out.println("You entered: " + answer);
-				
 				} 	
 				else {
-					answer = "wrong";
-					//System.out.println("You did not enter data");
-		    
+					answer = "wrong";		    
 				}
-		
-
 				long d2 = new Date().getTime();
 				long answer_time = d2 - d1;
 				output.println(answer + "," + Integer.toString((int) answer_time));
 				
 				correct_answer = in.readLine();
-				//message = in.readLine();
 				System.out.println(correct_answer);
-				//System.out.println(message);
-			
-				
 			}
 			
 			System.out.println(in.readLine());
