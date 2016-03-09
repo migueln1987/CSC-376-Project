@@ -48,39 +48,32 @@ public class TriviaGame implements Runnable {
 			output1.println(strbld.toString());
 			output2.println(strbld.toString());
 			
-			String[] response1 = input1.readLine().split(",");
-			String[] response2 = input2.readLine().split(",");
+			String[] response1 = input1.readLine().trim().split(",");
+			String[] response2 = input2.readLine().trim().split(",");
 			
 
-			
-			if (Integer.valueOf(response1[1]) < Integer.valueOf(response2[1]) )
-			{
-				if (response1[0].toLowerCase().charAt(0) == right.charAt(0)) {
-					winner = "player1";
-					triviaScore.addPointPlayer1();
+			try {
+				if (Integer.valueOf(response1[1]) < Integer.valueOf(response2[1])) {
+					if (response1[0].toLowerCase().charAt(0) == right.charAt(0)) {
+						winner = "player1";
+						triviaScore.addPointPlayer1();
+					} else if (response2[0].toLowerCase().charAt(0) == right.charAt(0)) {
+						winner = "player2";
+						triviaScore.addPointPlayer2();
+					} else winner = "both wrong";
+				} else {
+					if (response2[0].toLowerCase().charAt(0) == right.charAt(0)) {
+						winner = "player2";
+						triviaScore.addPointPlayer2();
+					} else if (response1[0].toLowerCase().charAt(0) == right.charAt(0)) {
+						winner = "player1";
+						triviaScore.addPointPlayer1();
+					} else winner = "both wrong";
+
 				}
-				
-				else if (response2[0].toLowerCase().charAt(0) == right.charAt(0)){
-					winner = "player2";
-					triviaScore.addPointPlayer2();
-				}
-				
-				else winner = "both wrong";
 			}
-			else
-			{
-				if (response2[0].toLowerCase().charAt(0) == right.charAt(0)) {
-					winner = "player2";
-					triviaScore.addPointPlayer2();
-				}
-				
-				else if (response1[0].toLowerCase().charAt(0) == right.charAt(0)) {
-					winner = "player1";
-					triviaScore.addPointPlayer1();
-				}
-				
-				else winner = "both wrong";
-				
+			catch (Exception e){
+				System.out.println(e.getMessage());
 			}
 			System.out.println("player one says: " + response1[0] + "\n"
 					+ "player two says: " + response2[0]);
