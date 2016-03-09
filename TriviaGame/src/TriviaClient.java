@@ -36,11 +36,17 @@ public class TriviaClient {
 			String correct_answer, message;
 			for (int i = 0; i < 10; i++) {
 				// question
+				System.out.println();
 				System.out.println(in.readLine());
+				System.out.println();
 
 				//options
 				System.out.println(in.readLine());
-	
+				System.out.println(in.readLine());
+				System.out.println(in.readLine());
+				System.out.println(in.readLine());
+
+				System.out.println();
 				System.out.println("Enter Response: ");
 
 				long d1 = new Date().getTime();
@@ -62,6 +68,9 @@ public class TriviaClient {
 				
 				correct_answer = in.readLine();
 				System.out.println(correct_answer);
+
+				System.out.println(in.readLine());
+				System.out.println("------------------------------------------------");
 			}
 			
 			System.out.println(in.readLine());

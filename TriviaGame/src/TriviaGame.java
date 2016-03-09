@@ -41,10 +41,10 @@ public class TriviaGame implements Runnable {
 		output2.println(question.getQuestion());
 		String right = question.getRightAnswer();
 			
-		strbld.append(question.getOption1().toString() + " " + 
-					  question.getOption2().toString() + " " + 
-				      question.getOption3().toString() + " " +
-				      question.getOption4().toString() + " ");
+		strbld.append(question.getOption1().toString() + "\n" +
+					  question.getOption2().toString() + "\n" +
+				      question.getOption3().toString() + "\n" +
+				      question.getOption4().toString() + "\n");
 			output1.println(strbld.toString());
 			output2.println(strbld.toString());
 			
@@ -55,12 +55,12 @@ public class TriviaGame implements Runnable {
 			
 			if (Integer.valueOf(response1[1]) < Integer.valueOf(response2[1]) )
 			{
-				if (response1[0].charAt(0) == right.charAt(0)) {
+				if (response1[0].toLowerCase().charAt(0) == right.charAt(0)) {
 					winner = "player1";
 					triviaScore.addPointPlayer1();
 				}
 				
-				else if (response2[0].charAt(0) == right.charAt(0)){
+				else if (response2[0].toLowerCase().charAt(0) == right.charAt(0)){
 					winner = "player2";
 					triviaScore.addPointPlayer2();
 				}
@@ -69,12 +69,12 @@ public class TriviaGame implements Runnable {
 			}
 			else
 			{
-				if (response2[0].charAt(0) == right.charAt(0)) {
+				if (response2[0].toLowerCase().charAt(0) == right.charAt(0)) {
 					winner = "player2";
 					triviaScore.addPointPlayer2();
 				}
 				
-				else if (response1[0].charAt(0) == right.charAt(0)) {
+				else if (response1[0].toLowerCase().charAt(0) == right.charAt(0)) {
 					winner = "player1";
 					triviaScore.addPointPlayer1();
 				}
