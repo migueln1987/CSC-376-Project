@@ -101,6 +101,7 @@ public class TriviaGame implements Runnable {
 				output2.println("You Lose, Better Luck Next Time.\n"
 						+ " Your Final Score: " + triviaScore.player2Score() + "/n"
 						+  "Opponents Final Score: " + triviaScore.player1Score());
+				System.out.println("winner: " + winner);	
 			}
 			
 			if (triviaScore.player2Score() > triviaScore.player1Score())
@@ -112,6 +113,7 @@ public class TriviaGame implements Runnable {
 				output1.println("You Lose, Better Luck Next Time.\n"
 						+ " Your Final Score: " + triviaScore.player2Score() + "/n"
 						+  "Opponents Final Score: " + triviaScore.player1Score());
+				System.out.println("winner: " + winner);	
 			}
 			else
 			{
@@ -121,8 +123,9 @@ public class TriviaGame implements Runnable {
 				output1.println("Tie\n"
 						+ " Your Final Score: " + score2 + "/n"
 						+  "Opponents Final Score: " + score1);
+				//System.out.println("winner: " + "Tie");	
 			}
-			System.out.println("winner: " + winner);		
+			//System.out.println("winner: " + "Tie");		
 		
 	}
 	

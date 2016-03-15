@@ -52,7 +52,7 @@ public class TriviaClient {
 				long d1 = new Date().getTime();
 		
 				long startTime = System.currentTimeMillis();
-				while ((System.currentTimeMillis() - startTime) < 20 * 1000
+				while ((System.currentTimeMillis() - startTime) < 10 * 1000
 					&& !stdIn.ready()) {
 				}
 
